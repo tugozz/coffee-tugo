@@ -29,5 +29,5 @@ export default function NewPost() {
     redirect("/");
   }
 
-  return;
+  return <div>fafafaafd</div>;
 }
