@@ -8,18 +8,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id                Int        @id @default(autoincrement())
-  email             String     @unique
-  password          String
-  userName          String     @unique
-  receivedDonations Donation[] @relation("UserRecievedDonations")
-  createdAt         DateTime   @default(now())
-  profileId         Int        @unique
-  bankCard          BankCard?
-  updatedAt         DateTime   @updatedAt
-}
-
 model BankCard {
   id         Int      @id @default(autoincrement())
   country    String
@@ -27,14 +15,14 @@ model BankCard {
   lastName   String
   cardNumber String
   expiryDate DateTime
-  userId     Int      @unique
-  user       User     @relation(fields: [userId], references: [id])
-  createdAt  DateTime @default(now())
+  userId     String      @unique
+  createdAt  DateTime  @default(now())
   updatedAt  DateTime
 }
 
 model Profile {
   id              Int      @id @default(autoincrement())
+  userId          String
   name            String
   about           String
   avatarImage     String
@@ -50,9 +38,8 @@ model Donation {
   amount                  Int
   specialMessage          String
   socialURLOrBuyMeACoffee String
-  donorId                 Int
-  recipientId             Int
-  recipient               User     @relation("UserRecievedDonations", fields: [recipientId], references: [id])
+  donorId                 String
+  recipientId             String
   createdAt               DateTime @default(now())
   updatedAt               DateTime
 }
