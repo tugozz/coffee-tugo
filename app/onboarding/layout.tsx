@@ -6,7 +6,10 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  if ((await auth()).sessionClaims?.metadata.onboardingComplete === true) {
+  const session = await auth();
+  console.log("SESSION CLAIMS:", session.sessionClaims);
+
+  if (session.sessionClaims?.metadata.onboardingComplete === true) {
     redirect("/");
   }
 
