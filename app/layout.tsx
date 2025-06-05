@@ -1,5 +1,4 @@
 import { type Metadata } from "next";
-import { Coffee } from "lucide-react";
 import {
   ClerkProvider,
   SignInButton,
@@ -10,8 +9,6 @@ import {
 } from "@clerk/nextjs";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import HeaderComponents from "./components/HeaderComponents";
-import Head from "next/head";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,22 +36,19 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <header className="w-full fixed flex items-center justify-between px-8 py-4 bg-white shadow z-50">
-            <div className="flex items-center gap-2">
-              <Coffee className="w-5 h-5 text-yellow-600" />
-              <h1 className="font-bold text-lg text-black">Buy Me Coffee</h1>
+          <header className="flex justify-between items-center p-4 gap-4 h-16">
+            <div className="flex gap-2 items-center justify-center">
+              <img src="/illustration.png" alt="" />
+              <p className="font-bold text-[16px]">Buy Me Coffee</p>
             </div>
-            <div className="flex gap-4 items-center">
-              <SignedOut>
-                <SignInButton />
-              </SignedOut>
-
-              <SignedIn>
-                <UserButton />
-              </SignedIn>
-            </div>
+            <SignedOut>
+              <SignInButton />
+              <SignUpButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </header>
-
           {children}
         </body>
       </html>
